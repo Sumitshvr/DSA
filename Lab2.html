@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LAB2 PROGRAM </title>
+<script type="text/javascript" src="https:\\ajax.googleapis.com\ajax\libs\angularjs\1.8.2\angular.min.js">
+        </script>
+        <script>
+            var app=angular.module("myApp",[]); 
+            app.controller("myCntrl",function($scope){
+                $scope.shoppingitems=['Eggs','Bread','Milk','Curd']
+
+            $scope.additem=function(){
+                if($scope.newitem && $scope.shoppingitems.indexOf($scope.newitem)==-1)
+                {
+                    $scope.shoppingitems.push($scope.newitem)
+                    $scope.newitem=""
+                }
+                else
+                {
+                    if($scope.newitem)
+                        alert("This item is already their in the Shopping List")
+                    else
+                        alert("Please enter an item to add")
+                }
+            }
+
+            $scope.removeitem=function(){
+                if($scope.shoppingitems.indexOf($scope.selectitem)==-1)
+                    alert("Please select an item to remove")
+                else
+                {
+                    var index=$scope.shoppingitems.indexOf($scope.selectitem)
+                    $scope.shoppingitems.splice(index,1)
+                    $scope.selectitem=""
+                }
+            }
+            });
+        </script>
+    </head>
+    <body ng-app="myApp"> 
+        <h2>Shopping Application</h2>
+        <h4>List of Shopping Items</h4>
+        <div ng-controller="myCntrl">
+            <ul>
+                <li ng-repeat="item in shoppingitems">{{item}}</li>
+            </ul>
+            Enter a Item to Add:<input type="text" ng-model="newitem">
+            <button ng-click="additem()">Add Item</button> <br/><br />
+
+Select an Item to remove:<select ng-model="selectitem" ng-options="item for item in shoppingitems" ></select>
+            <button ng-click="removeitem()">Remove Item</button>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LAB5 PROGRAM</title>
+        <script type="text/javascript" src="https:\\ajax.googleapis.com\ajax\libs\angularjs\1.8.2\angular.min.js">
+        </script>
+        <script> 
+        var app=angular.module("myApp",[]); 
+        app.controller("myCntrl",function($scope){
+               $scope.stdata=[] 
+               $scope.generatedata=function(){
+                $scope.stdata=[]    
+                for(var i=1;i<=$scope.num;i++)
+                {        var stud={"SLNO":i,"NAME":'Student-'+i,"CGPA":(Math.random()*10).toFixed(2)}
+                         $scope.stdata.push(stud)
+                } 
+               }   
+            });        
+        </script>
+    </head>
+    <body ng-app="myApp"> 
+        <h1>STUDENT DETAILS APPLICATION</h1>
+        <div ng-controller="myCntrl">
+            Enter the Number of Students to Generate the data:<input type="number" ng-model="num">
+            <button ng-click="generatedata()">GENERATE DATA</button><br/>
+            <table border="1" ng-show="stdata.length>0">
+                <tr>
+                    <th>SL.NO.</th>
+                    <th>NAME</th>
+                    <th>CGPA</th>
+                </tr>
+                <tr ng-repeat="std in stdata">
+                    <td>{{std.SLNO}}</td>
+                    <td>{{std.NAME}}</td>
+                    <td>{{std.CGPA}}</td>
+                </tr>
+            </table><br/>
+            Number of Students={{stdata.length}}
+        </div>
+    </body>
+    </html>
